@@ -22,7 +22,7 @@ public class ZipCodePage {
 
     private final By registrationFormTitle = By.xpath("/html/body/center/table/tbody/tr[5]/td/table/tbody/tr[2]/td/table/tbody/tr[7]/td/span");
 
-    private ZipCodePage (WebDriver driver){
+    public ZipCodePage (WebDriver driver){
         this.driver=driver;
         this.wait=new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -44,6 +44,10 @@ public class ZipCodePage {
     }
     public String getError(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage));
-        return
+        return driver.findElement(errorMessage).getText();
+    }
+    public boolean isRegistrationFromVisible(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(registrationFormTitle));
+        return driver.findElement(registrationFormTitle).isDisplayed();
     }
 }
